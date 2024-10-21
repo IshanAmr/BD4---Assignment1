@@ -4,6 +4,8 @@ const { dishInitDB } = require('./dishDB');
 const { restrauntInitDB } = require('./restrauntDB');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+app.use(cors());
 
 dishInitDB();
 const dishDB = new sqlite3.Database('./dish_database.sqlite');
@@ -11,9 +13,6 @@ const dishDB = new sqlite3.Database('./dish_database.sqlite');
 restrauntInitDB();
 const restrauntDB = new sqlite3.Database('./restraunt_database.sqlite');
 
-app.get("/", (req, res) => {
-    res.json({ message : "Hello world"});
-})
 
 const getAllDishes = async () => {
     return new Promise((resolve, reject)=> {

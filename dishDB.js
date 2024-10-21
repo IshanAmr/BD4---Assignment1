@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
 const dishInitDB = () => {
-  // Create an in-memory SQLite database
   const db = new sqlite3.Database(':memory:', (err) => {
     if (err) {
       console.error(err.message);
@@ -10,7 +9,6 @@ const dishInitDB = () => {
     console.log('Connected to the dish database.');
 
     db.serialize(() => {
-      // Create table
       db.run('DROP TABLE IF EXISTS dishes');
       db.run(`
         CREATE TABLE IF NOT EXISTS dishes (
@@ -55,7 +53,6 @@ const dishInitDB = () => {
       console.log('Dishes table created and data inserted.');
     });
 
-    // Close the database connection
     db.close((err) => {
       if (err) {
         console.error(err.message);
@@ -65,5 +62,4 @@ const dishInitDB = () => {
   });
 };
 
-// Export the dishInitDB function
 module.exports = { dishInitDB };

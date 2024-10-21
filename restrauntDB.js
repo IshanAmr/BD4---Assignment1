@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
 const restrauntInitDB = () => {
-  // Create an in-memory SQLite database
   const db = new sqlite3.Database(':memory:', (err) => {
     if (err) {
       console.error(err.message);
@@ -10,7 +9,6 @@ const restrauntInitDB = () => {
     console.log('Connected to the restaurant database.');
 
     db.serialize(() => {
-      // Create table
       db.run('DROP TABLE IF EXISTS restraunts');
       db.run(`
         CREATE TABLE IF NOT EXISTS restraunts (
@@ -71,7 +69,6 @@ const restrauntInitDB = () => {
       console.log('Restraunts table created and data inserted.');
     });
 
-    // Close the database connection
     db.close((err) => {
       if (err) {
         console.error(err.message);
@@ -81,5 +78,4 @@ const restrauntInitDB = () => {
   });
 };
 
-// Export the initialization function
 module.exports = { restrauntInitDB };
