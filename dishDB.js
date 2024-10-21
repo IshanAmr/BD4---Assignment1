@@ -56,12 +56,6 @@ const dishInitDB = () => {
     });
 
     // Close the database connection
-    db.close((err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log('Closed the dishes database connection.');
-    });
   });
 };
 
