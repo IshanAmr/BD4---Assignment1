@@ -1,15 +1,15 @@
 const sqlite3 = require('sqlite3').verbose();
 
-// Create an in-memory SQLite database
-const db = new sqlite3.Database('./dish_database.sqlite', (err) => {
-  if (err) {
-      console.error(err.message);
-  }
-  console.log('Connected to the dish database.');
-});
-
 const dishInitDB = () => {
-  db.serialize(() => {
+  // Create an in-memory SQLite database
+  const db = new sqlite3.Database(':memory:', (err) => {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log('Connected to the dish database.');
+
+    db.serialize(() => {
       // Create table
       db.run('DROP TABLE IF EXISTS dishes');
       db.run(`
@@ -21,7 +21,7 @@ const dishInitDB = () => {
           isVeg TEXT
         )
       `);
-      
+
       const dishes = [
         {
           'id': 1,
@@ -44,7 +44,7 @@ const dishInitDB = () => {
           'rating': 4.3,
           'isVeg': 'true'
         }
-      ]
+      ];
 
       const stmt = db.prepare(`INSERT INTO dishes (id, name, price, rating, isVeg) VALUES (?, ?, ?, ?, ?)`);
       dishes.forEach(dish => {
@@ -53,17 +53,17 @@ const dishInitDB = () => {
       stmt.finalize();
 
       console.log('Dishes table created and data inserted.');
-  });
+    });
 
-  db.close((err) => {
-    if (err) {
+    // Close the database connection
+    db.close((err) => {
+      if (err) {
         console.error(err.message);
-    }
-    console.log('Closed the dishes database connection.');
-});
+      }
+      console.log('Closed the dishes database connection.');
+    });
+  });
 };
 
-
-
-// Export the in-memory database
+// Export the dishInitDB function
 module.exports = { dishInitDB };
