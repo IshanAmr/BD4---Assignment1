@@ -210,8 +210,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
 
-process.on('SIGINT', () => {
-  dishCloseDB();
-  restrauntCloseDB();
-  process.exit();
-});
+// process.on('SIGINT', () => {
+//   dishCloseDB();
+//   restrauntCloseDB();
+//   process.exit();
+// });
