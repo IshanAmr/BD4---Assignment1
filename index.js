@@ -1,7 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
-const { dishInitDB, dishCloseDB } = require('./dishDB');
-const { restrauntInitDB, restrauntCloseDB } = require('./restrauntDB');
+const { dishInitDB } = require('./dishDB');
+const { restrauntInitDB } = require('./restrauntDB');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -209,9 +209,3 @@ app.get("/restaurants/cuisine/:cuisine", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 });
-
-// process.on('SIGINT', () => {
-//   dishCloseDB();
-//   restrauntCloseDB();
-//   process.exit();
-// });

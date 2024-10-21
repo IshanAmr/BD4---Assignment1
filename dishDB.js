@@ -54,16 +54,16 @@ const dishInitDB = () => {
 
       console.log('Dishes table created and data inserted.');
   });
+
+  db.close((err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Closed the dishes database connection.');
+});
 };
 
-const dishCloseDB = () => {
-  db.close((err) => {
-      if (err) {
-          console.error(err.message);
-      }
-      console.log('Closed the dishes database connection.');
-  });
-};
+
 
 // Export the in-memory database
-module.exports = { dishInitDB, dishCloseDB };
+module.exports = { dishInitDB };

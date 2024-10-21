@@ -69,16 +69,14 @@ const restrauntInitDB = () => {
 
       console.log('Restraunts table created and data inserted.');
   });
-};
 
-const restrauntCloseDB = () => {
   db.close((err) => {
-      if (err) {
-          console.error(err.message);
-      }
-      console.log('Closed the restraunts database connection.');
-  });
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Closed the restraunts database connection.');
+});
 };
 
 // Export the in-memory database
-module.exports = { restrauntInitDB, restrauntCloseDB };
+module.exports = { restrauntInitDB };
